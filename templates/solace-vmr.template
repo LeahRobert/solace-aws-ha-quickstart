@@ -285,12 +285,6 @@
         }
     },
     "Conditions": {
-        "EnableWaitConditions": {
-            "Fn::Equals": [
-                "1",
-                "1"
-            ]
-        },
         "Use3AZs": {
             "Fn::Equals": [
                 {"Ref": "NumberOfAZs"},
@@ -417,7 +411,7 @@
                     "KeyPairName": {
                         "Ref": "KeyPairName"
                     },
-                    "NodeDesignation": "message-router-primary",
+                    "NodeDesignation": "MessageRouterPrimary",
                     "NodeInstanceType": {
                         "Ref": "MessageRouterNodeInstanceType"
                     },
@@ -495,7 +489,7 @@
                     "KeyPairName": {
                         "Ref": "KeyPairName"
                     },
-                    "NodeDesignation": "message-router-backup",
+                    "NodeDesignation": "MessageRouterBackup",
                     "NodeInstanceType": {
                         "Ref": "MessageRouterNodeInstanceType"
                     },
@@ -573,7 +567,7 @@
                     "KeyPairName": {
                         "Ref": "KeyPairName"
                     },
-                    "NodeDesignation": "monitor",
+                    "NodeDesignation": "Monitor",
                     "NodeInstanceType": {
                         "Ref": "MonitorNodeInstanceType"
                     },
@@ -719,7 +713,6 @@
         },
         "ClusterInfoCondition": {
             "Type": "AWS::CloudFormation::WaitCondition",
-            "Condition": "EnableWaitConditions",
             "DependsOn": ["MessageRouterPrimaryStack", "MessageRouterBackupStack", "MonitorStack"],
             "Properties": {
                 "Handle": {
